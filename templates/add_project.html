@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block head %} Add Project {% endblock %}
+
+
+{% block content %}
+
+<dl class="row">
+    <dt class="col-sm-3">Title</dt>
+    <dt class="col-sm-9">Description</dd>
+        {% for project in projects %}
+        <dd class="col-sm-3"> {{ project.title }} </dt>
+        <dd class="col-sm-9"> {{project.description }}</dd>
+    {% endfor %}
+  </dl>
+
+<div id="input_wrapper">
+    <form action="/project" method="POST">
+        <h2>Add new project</h2>
+        <div class="form-group">
+          <input type="text" class="form-control" id="project_title" aria-describedby="titleHelp" name="title" placeholder="Enter project title">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="project_desc" placeholder="Description" name="desc">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

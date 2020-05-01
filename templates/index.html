@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block head %} Home Page {% endblock %}
+
+
+{% block content %}
+<h2>{{ project_active.title }}</h2>
+
+{% for task in project_active.tasks %}
+
+<div class="row">
+    <div class="col-sm-4">
+        {% if task.done %} <strike> {{ task.title }} </strike>
+        {% else %} {{ task.title }}
+        {% endif %}
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <a href="/done/{{ task.id }}" class="btn btn-primary"><i class="fas fa-check"></i></a>
+        <a href="/delete/{{ task.id }}" class="btn btn-primary"><i class="fas fa-trash-alt"></i></a>
+        {{ task.due_date }}
+    </div>
+</div>
+{% endfor %}
+
+<div id="input_wrapper">
+    <form action="/task/{{ projects[0].id }}" method="POST">
+        <h2>Add new task</h2>
+        <div class="form-group">
+          <input type="text" class="form-control" id="task_title" aria-describedby="titleHelp" name="title" placeholder="Enter task title">
+        </div>
+        <div class="form-group">
+          <input type="datetime" class="form-control" id="task_due_date" placeholder="Due Date" name="due_date">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="task_tag" name="tag" placeholder="Tag">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

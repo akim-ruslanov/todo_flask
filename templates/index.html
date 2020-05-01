@@ -5,6 +5,9 @@
 {% block content %}
 <h2>{{ project_active.title }}</h2>
 
+{% if project_active == -1 %}
+<h2>Looks like there are no active projects. Go ahead and add a <a href="/project_page">new project</a>!</h2>
+{% else %}
 {% for task in project_active.tasks %}
 
 <div class="row">
@@ -13,11 +16,10 @@
         {% else %} {{ task.title }}
         {% endif %}
     </div>
-    <div class="col-sm-4"></div>
     <div class="col-sm-4">
+        {{ task.due_date }}
         <a href="/done/{{ task.id }}" class="btn btn-primary"><i class="fas fa-check"></i></a>
         <a href="/delete/{{ task.id }}" class="btn btn-primary"><i class="fas fa-trash-alt"></i></a>
-        {{ task.due_date }}
     </div>
 </div>
 {% endfor %}
@@ -29,7 +31,7 @@
           <input type="text" class="form-control" id="task_title" aria-describedby="titleHelp" name="title" placeholder="Enter task title">
         </div>
         <div class="form-group">
-          <input type="datetime" class="form-control" id="task_due_date" placeholder="Due Date" name="due_date">
+          <input type="date" class="form-control" id="date_picker" placeholder="Due Date" name="due_date">
         </div>
         <div class="form-group">
           <input type="text" class="form-control" id="task_tag" name="tag" placeholder="Tag">
@@ -37,4 +39,5 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+{% endif %}
 {% endblock %}

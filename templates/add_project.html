@@ -8,8 +8,11 @@
     <dt class="col-sm-3">Title</dt>
     <dt class="col-sm-9">Description</dd>
         {% for project in projects %}
-        <dd class="col-sm-3"> {{ project.title }} </dt>
-        <dd class="col-sm-9"> {{project.description }}</dd>
+        <dd class="col-sm-3"> <a href="/{{ project.id }}">{{ project.title }}</a>  </dt>
+        <dd class="col-sm-6"> {{project.description }}</dd>
+        <dd class="col-sm-1">
+          <a href="/delete_project/{{ project.id }}" class="btn btn-primary"><i class="fas fa-trash-alt"></i></a>
+        </dd>
     {% endfor %}
   </dl>
 

@@ -69,6 +69,8 @@ def about():
 @app.route('/<int:project_id>')
 def project_tasks(project_id):
     projects = Project.query.all()
+    if (len(projects) == 0):
+        return render_template('index.html', projects=projects, project_active=-1)
     project_active = Project.query.get(project_id)
     return render_template('index.html', projects=projects, project_active=project_active)
 
